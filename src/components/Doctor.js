@@ -190,7 +190,7 @@ const Doctor = () => {
                             <img src={doctor.image_url || placeholderImage} alt={`${doctor.name}'s Photo`} onError={handleImageError} />
                         </div>
                         <h3>
-                            <a href={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</a>
+                            <a href={`/mib-doctors/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</a>
                         </h3>
                         <p><FaUserMd /> {doctor.speciality}</p> {/* Display specialization normally */}
                         <p><FaClinicMedical /> {doctor.clinic_name}</p> {/* Display clinic name normally */}
