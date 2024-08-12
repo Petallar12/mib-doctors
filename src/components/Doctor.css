@@ -1,0 +1,337 @@
+/* src/components/Doctor.css */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px; /* Default padding for large screens */
+}
+
+@media (max-width: 1200px) {
+    .container {
+        padding: 20px; /* Adjust padding for medium screens */
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Adjust padding for mobile screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 10px; /* Minimal padding for very small screens */
+    }
+}
+
+.doctor-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.doctor-box {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   
+}
+.doctor-box h3 a {
+    color: #000; /* Black color for the doctor's name */
+   
+}
+
+/* Change the clinic name and specialization to not bold */
+.doctor-box p {
+    margin: 5px 0;
+    font-size: 12px;
+    font-weight: normal;
+    
+}
+
+.doctor-box a {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.doctor-box a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .doctor-container {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns on screens smaller than 1200px */
+    }
+}
+
+@media (max-width: 992px) {
+    .doctor-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on screens smaller than 992px */
+    }
+}
+
+@media (max-width: 768px) {
+    .doctor-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on screens smaller than 768px */
+    }
+}
+
+@media (max-width: 576px) {
+    .doctor-container {
+        grid-template-columns: 1fr; /* 1 column on screens smaller than 576px */
+    }
+}
+
+/* Centering the photo */
+.photo-box {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    margin: 0 auto 10px auto; /* Center the box horizontally */
+    border-radius: 50%; /* Use 50% to make it a perfect circle */
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Filter and Alphabetical Filter */
+
+.filter-box {
+    background-color: #f9f9f9; /* light background color for the box */
+    border: 1px solid #ccc; /* border around the box */
+    border-radius: 8px; /* rounded corners */
+    padding: 20px; /* padding inside the box */
+    margin-bottom: 20px; /* space below the filter box */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow for the box */
+}
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0; /* No padding here as container padding is applied */
+}
+
+.filter-container input {
+    width: 30%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.alphabet-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.alphabet-filter button {
+    margin: 0 5px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.alphabet-filter button:hover {
+    background-color: #0056b3;
+}
+
+.alphabet-filter button.active {
+    background-color: #ff0000;
+    color: white;
+}
+
+.alphabet-filter button:focus {
+    outline: none;
+}
+
+.suggestions {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%; /* Full width of the input container */
+    z-index: 1000;
+    text-transform: uppercase; /* Make all text capitalized */
+}
+
+.suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestions li:hover {
+    background-color: #f0f0f0;
+}
+/* Container to wrap each input and its suggestions */
+.input-container {
+    position: relative;
+    width: 30%; /* Same width as the input fields */
+}
+
+.input-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+
+/* doctordetails css
+ */
+ .doctor-detail-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.doctor-detail-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    max-width: 800px;
+}
+
+.doctor-detail-header {
+    display: flex;
+    padding: 20px;
+    background-color: #f7f7f7;
+    align-items: center;
+}
+
+.doctor-detail-photo {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.doctor-detail-name h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.doctor-detail-name p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.doctor-detail-name p svg {
+    margin-right: 8px;
+    color: #555;
+}
+
+.doctor-detail-body {
+    padding: 20px;
+}
+
+.doctor-detail-body h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.doctor-detail-body p {
+    margin: 10px 0;
+    color: #666;
+}
+
+.back-to-list {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.back-to-list svg {
+    margin-right: 8px;
+}
+
+.back-to-list:hover {
+    text-decoration: underline;
+}
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.more-info-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.more-info-btn:hover {
+    background-color: #0056b3;
+}
