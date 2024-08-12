@@ -58,7 +58,7 @@ const DoctorDetail = () => {
                         More Info
                     </button>
 
-                    <Link to="/" className="back-to-list">
+                    <Link to="/mib-doctors" className="back-to-list">
                         <FaArrowLeft /> Back to List
                     </Link>
                 </div>
