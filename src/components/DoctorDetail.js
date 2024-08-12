@@ -8,6 +8,7 @@ import { FaMapMarkerAlt, FaClinicMedical, FaUserMd, FaArrowLeft } from 'react-ic
 const DoctorDetail = () => {
     const { id } = useParams();
     const [doctor, setDoctor] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
 
     useEffect(() => {
         loadDoctorDetails();
@@ -20,6 +21,10 @@ const DoctorDetail = () => {
 
     const handleImageError = (e) => {
         e.target.src = placeholderImage; // Set the placeholder image on error
+    };
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen); // Toggle modal visibility
     };
 
     if (!doctor) {
@@ -49,15 +54,26 @@ const DoctorDetail = () => {
                     <p><FaMapMarkerAlt /> {doctor.address_3}</p>
                     <p><FaMapMarkerAlt /> {doctor.address_4}</p>
 
-                    {/* More Info Section */}
-                    <h3>More Info</h3>
-                    <p>{doctor.more_info || "No additional information available."}</p>
+                    <button className="more-info-btn" onClick={toggleModal}>
+                        More Info
+                    </button>
 
                     <Link to="/" className="back-to-list">
                         <FaArrowLeft /> Back to List
                     </Link>
                 </div>
             </div>
+
+            {/* Modal Implementation */}
+            {isModalOpen && (
+                <div className="modal-overlay" onClick={toggleModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <span className="close-modal" onClick={toggleModal}>&times;</span>
+                        <h2>About the Doctor</h2>
+                        <p>{doctor.more_info || "No additional information available."}</p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

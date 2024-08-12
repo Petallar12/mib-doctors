@@ -7,8 +7,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/mib-doctors/" element={<Doctor />} />
-        <Route path="/mib-doctors/doctor/:id" element={<DoctorDetail />} />
+        <Route path="/" element={<Doctor />} />
+        <Route path="/doctor/:id" element={<DoctorDetail />} />
       </Routes>
     </Router>
   );
