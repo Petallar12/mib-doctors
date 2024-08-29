@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Doctor.css';
@@ -26,9 +25,13 @@ const Doctor = () => {
     }, [filters, selectedLetter, doctors]);
 
     const loadDoctors = async () => {
-        const result = await axios.get('https://backend-doctor.vercel.app/doctors');
-        setDoctors(result.data);
-        setFilteredDoctors(result.data);
+        try {
+            const result = await axios.get('https://backend-doctor.vercel.app/doctors');
+            setDoctors(result.data);
+            setFilteredDoctors(result.data);
+        } catch (error) {
+            console.error('Failed to load doctors:', error);
+        }
     };
 
     const applyFilters = () => {
@@ -188,7 +191,11 @@ const Doctor = () => {
                 {filteredDoctors.map(doctor => (
                     <div className="doctor-box" key={doctor.id}>
                         <div className="photo-box">
-                            <img src={doctor.image_url || placeholderImage} alt={`${doctor.name}'s Photo`} onError={handleImageError} />
+                            <img 
+                                src={doctor.image_url ? doctor.image_url : placeholderImage} 
+                                alt={`${doctor.name}'s Photo`} 
+                                onError={handleImageError} 
+                            />
                         </div>
                         <h3>
                             <a href={`/mib-doctors/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</a>
