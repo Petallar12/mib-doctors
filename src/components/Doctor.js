@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Doctor.css';
-import placeholderImage from '../images/dr-zena-lim.jpg';
+import placeholderImage from '../images/default.jpg'; // This is the local placeholder image
 import { FaMapMarkerAlt, FaClinicMedical, FaUserMd } from 'react-icons/fa';
-import Modal from 'react-modal'; // Make sure to install react-modal
+import Modal from 'react-modal';
 
 const Doctor = () => {
     const [doctors, setDoctors] = useState([]);
@@ -57,7 +57,7 @@ const Doctor = () => {
 
         if (selectedLetter) {
             updatedDoctors = updatedDoctors.filter(doctor => {
-                const nameWithoutPrefix = doctor.name.replace(/^Dr\s+/i, ''); // Remove "Dr" prefix
+                const nameWithoutPrefix = doctor.name.replace(/^Dr\s+/i, '');
                 return nameWithoutPrefix.toLowerCase().startsWith(selectedLetter.toLowerCase());
             });
         }
@@ -106,7 +106,7 @@ const Doctor = () => {
     };
 
     const handleImageError = (e) => {
-        e.target.src = placeholderImage;
+        e.target.src = placeholderImage; // If an image fails to load, show the placeholder
     };
 
     const openModal = (moreInfo) => {
@@ -192,7 +192,7 @@ const Doctor = () => {
                     <div className="doctor-box" key={doctor.id}>
                         <div className="photo-box">
                             <img 
-                                src={doctor.image_url ? `https://petallar12.github.io/mib-doctors/public/images/${doctor.image_url}` : placeholderImage} 
+                                src={doctor.image_url ? `https://raw.githubusercontent.com/petallar12/mib-doctors/main/public/images/${doctor.image_url}` : placeholderImage} 
                                 alt={`${doctor.name}'s Photo`} 
                                 onError={handleImageError} 
                             />
@@ -205,7 +205,6 @@ const Doctor = () => {
                     </div>
                 ))}
             </div>
-
         </div>
     );
 };
