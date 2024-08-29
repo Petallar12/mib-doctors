@@ -192,7 +192,7 @@ const Doctor = () => {
                     <div className="doctor-box" key={doctor.id}>
                         <div className="photo-box">
                             <img 
-                                src={doctor.image_url ? doctor.image_url : placeholderImage} 
+                                src={doctor.image_url ? `https://petallar12.github.io/mib-doctors/public/images/${doctor.image_url}` : placeholderImage} 
                                 alt={`${doctor.name}'s Photo`} 
                                 onError={handleImageError} 
                             />
@@ -200,8 +200,8 @@ const Doctor = () => {
                         <h3>
                             <a href={`/mib-doctors/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</a>
                         </h3>
-                        <p><FaUserMd /> {doctor.speciality}</p> {/* Display specialization normally */}
-                        <p><FaClinicMedical /> {doctor.clinic_name}</p> {/* Display clinic name normally */}
+                        <p><FaUserMd /> {doctor.speciality}</p>
+                        <p><FaClinicMedical /> {doctor.clinic_name}</p>
                     </div>
                 ))}
             </div>
