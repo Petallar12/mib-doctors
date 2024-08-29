@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Doctor.css';
-import placeholderImage from '../images/default.jpg';
+import placeholderImage from '../images/dr-zena-lim.jpg';
 import { FaMapMarkerAlt, FaClinicMedical, FaUserMd } from 'react-icons/fa';
 import Modal from 'react-modal'; // Make sure to install react-modal
 
