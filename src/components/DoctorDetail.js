@@ -15,7 +15,7 @@ const DoctorDetail = () => {
     }, []);
 
     const loadDoctorDetails = async () => {
-        const result = await axios.get(`http://localhost:5000/doctors/${id}`);
+        const result = await axios.get(`https://backend-doctor.vercel.app/doctors/${id}`);
         setDoctor(result.data);
     };
 
