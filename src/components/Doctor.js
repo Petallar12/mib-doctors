@@ -26,7 +26,7 @@ const Doctor = () => {
     }, [filters, selectedLetter, doctors]);
 
     const loadDoctors = async () => {
-        const result = await axios.get('http://localhost:5000/doctors');
+        const result = await axios.get('https://backend-doctor.vercel.app/doctors');
         setDoctors(result.data);
         setFilteredDoctors(result.data);
     };
