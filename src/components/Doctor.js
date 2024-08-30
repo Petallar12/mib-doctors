@@ -198,7 +198,7 @@ const Doctor = () => {
 />
                         </div>
                         <h3>
-    <Link to={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
+    <Link to={`/mib-doctors/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
 </h3>
                         <p><FaUserMd /> {doctor.speciality}</p>
                         <p><FaClinicMedical /> {doctor.clinic_name}</p>
