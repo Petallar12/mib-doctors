@@ -58,7 +58,8 @@ const DoctorDetail = () => {
                         More Info
                     </button>
 
-                    <Link to="/mib-doctors" className="back-to-list">
+                    {/* Move the Back to List button below More Info but outside the modal */}
+                    <Link to="/mib-doctors" className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
                         <FaArrowLeft /> Back to List
                     </Link>
                 </div>
