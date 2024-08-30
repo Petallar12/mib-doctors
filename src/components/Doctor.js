@@ -192,7 +192,7 @@ const Doctor = () => {
                     <div className="doctor-box" key={doctor.id}>
                         <div className="photo-box">
                         <img 
-    src={doctor.image_url ? `${process.env.PUBLIC_URL}/images${doctor.image_url}` : placeholderImage} 
+    src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
     alt={`${doctor.name}'s Photo`} 
     onError={handleImageError} 
 />
