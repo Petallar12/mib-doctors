@@ -60,7 +60,7 @@ const DoctorDetail = () => {
                     <h3>More Info</h3>
                     <p>{doctor.more_info || "No additional information available."}</p>
 
-                    <Link to="/" className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
+                    <Link to="/mib-doctors" className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
                         <FaArrowLeft /> Back to List
                     </Link>
                 </div>
