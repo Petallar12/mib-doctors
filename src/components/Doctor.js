@@ -191,11 +191,11 @@ const Doctor = () => {
                 {filteredDoctors.map(doctor => (
                     <div className="doctor-box" key={doctor.id}>
                         <div className="photo-box">
-                        <img 
-    src={doctor.image_url ? `${process.env.PUBLIC_URL}${doctor.image_url}` : placeholderImage} 
-    alt={`${doctor.name}'s Photo`} 
-    onError={handleImageError} 
-/>
+                            <img 
+                                src={doctor.image_url ? `https://raw.githubusercontent.com/petallar12/mib-doctors/main${doctor.image_url}` : placeholderImage} 
+                                alt={`${doctor.name}'s Photo`} 
+                                onError={handleImageError} 
+                            />
                         </div>
                         <h3>
                             <a href={`/mib-doctors/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</a>
