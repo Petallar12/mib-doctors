@@ -8,23 +8,22 @@ import { FaMapMarkerAlt, FaClinicMedical, FaUserMd, FaArrowLeft } from 'react-ic
 const DoctorDetail = () => {
     const { id } = useParams();
     const [doctor, setDoctor] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
 
     useEffect(() => {
         loadDoctorDetails();
     }, []);
 
     const loadDoctorDetails = async () => {
-        const result = await axios.get(`https://backend-doctor.vercel.app/doctors/${id}`);
-        setDoctor(result.data);
+        try {
+            const result = await axios.get(`https://backend-doctor.vercel.app/doctors/${id}`);
+            setDoctor(result.data);
+        } catch (error) {
+            console.error('Failed to load doctor details:', error);
+        }
     };
 
     const handleImageError = (e) => {
         e.target.src = placeholderImage; // Set the placeholder image on error
-    };
-
-    const toggleModal = () => {
-        setIsModalOpen(!isModalOpen); // Toggle modal visibility
     };
 
     if (!doctor) {
@@ -54,27 +53,15 @@ const DoctorDetail = () => {
                     <p><FaMapMarkerAlt /> {doctor.address_3}</p>
                     <p><FaMapMarkerAlt /> {doctor.address_4}</p>
 
-                    <button className="more-info-btn" onClick={toggleModal}>
-                        More Info
-                    </button>
+                    {/* Display More Info directly above the Back to List button */}
+                    <h3>More Info</h3>
+                    <p>{doctor.more_info || "No additional information available."}</p>
 
-                    {/* Move the Back to List button below More Info but outside the modal */}
                     <Link to="/mib-doctors" className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
                         <FaArrowLeft /> Back to List
                     </Link>
                 </div>
             </div>
-
-            {/* Modal Implementation */}
-            {isModalOpen && (
-                <div className="modal-overlay" onClick={toggleModal}>
-                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <span className="close-modal" onClick={toggleModal}>&times;</span>
-                        <h2>About the Doctor</h2>
-                        <p>{doctor.more_info || "No additional information available."}</p>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
