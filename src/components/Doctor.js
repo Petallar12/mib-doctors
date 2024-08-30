@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Doctor.css';
 import placeholderImage from '../images/default.jpg'; // This is the local placeholder image
 import { FaMapMarkerAlt, FaClinicMedical, FaUserMd } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 
 const Doctor = () => {
@@ -198,8 +199,8 @@ const Doctor = () => {
 />
                         </div>
                         <h3>
-                            <a href={`/mib-doctors/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</a>
-                        </h3>
+    <Link to={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
+</h3>
                         <p><FaUserMd /> {doctor.speciality}</p>
                         <p><FaClinicMedical /> {doctor.clinic_name}</p>
                     </div>
