@@ -30,13 +30,16 @@ const DoctorDetail = () => {
         return <p>Loading...</p>; // Show loading while fetching data
     }
 
+    // Construct the image URL with /images/ prefix or use placeholder if no image_url is present
+    const imageUrl = doctor.image_url ? `/images/${doctor.image_url}` : placeholderImage;
+
     return (
         <div className="doctor-detail-container">
             <div className="doctor-detail-card">
                 <div className="doctor-detail-header">
                     <img 
                         className="doctor-detail-photo" 
-                        src={doctor.image_url || placeholderImage} 
+                        src={imageUrl} 
                         alt={`${doctor.name}'s Photo`} 
                         onError={handleImageError} 
                     />
@@ -57,7 +60,7 @@ const DoctorDetail = () => {
                     <h3>More Info</h3>
                     <p>{doctor.more_info || "No additional information available."}</p>
 
-                    <Link to="/mib-doctors" className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
+                    <Link to="/" className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
                         <FaArrowLeft /> Back to List
                     </Link>
                 </div>
