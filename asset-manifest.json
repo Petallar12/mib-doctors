@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/mib-doctors/static/css/main.6431b070.css",
-    "main.js": "/mib-doctors/static/js/main.3a5ef3f0.js",
+    "main.css": "/mib-doctors/static/css/main.306b12e6.css",
+    "main.js": "/mib-doctors/static/js/main.4890539e.js",
     "static/js/453.5d92bdc4.chunk.js": "/mib-doctors/static/js/453.5d92bdc4.chunk.js",
     "static/media/default.jpg": "/mib-doctors/static/media/default.69f25d96ff88994381dd.jpg",
     "index.html": "/mib-doctors/index.html",
-    "main.6431b070.css.map": "/mib-doctors/static/css/main.6431b070.css.map",
-    "main.3a5ef3f0.js.map": "/mib-doctors/static/js/main.3a5ef3f0.js.map",
+    "main.306b12e6.css.map": "/mib-doctors/static/css/main.306b12e6.css.map",
+    "main.4890539e.js.map": "/mib-doctors/static/js/main.4890539e.js.map",
     "453.5d92bdc4.chunk.js.map": "/mib-doctors/static/js/453.5d92bdc4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6431b070.css",
-    "static/js/main.3a5ef3f0.js"
+    "static/css/main.306b12e6.css",
+    "static/js/main.4890539e.js"
   ]
 }
