@@ -38,7 +38,7 @@ const DoctorDetail = () => {
         <div className="doctor-detail-container">
             <div className="doctor-detail-card">
                 <div className="doctor-detail-header">
-                    <img 
+                <img 
                         className="doctor-detail-photo" 
                         src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
                         alt={`${doctor.name}'s Photo`} 
