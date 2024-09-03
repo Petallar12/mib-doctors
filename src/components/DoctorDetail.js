@@ -40,7 +40,7 @@ const DoctorDetail = () => {
                 <div className="doctor-detail-header">
                     <img 
                         className="doctor-detail-photo" 
-                        src={doctor.image_url ? `/images/${doctor.image_url}` : placeholderImage} 
+                        src={doctor.image_url ? `mib-doctors/images/${doctor.image_url}` : placeholderImage} 
                         alt={`${doctor.name}'s Photo`} 
                         onError={handleImageError} 
                     />
