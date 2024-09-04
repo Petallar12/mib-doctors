@@ -199,16 +199,14 @@ const Doctor = () => {
                         <button key={letter} onClick={() => handleLetterClick(letter)}>{letter}</button>
                     ))}
                 </div>
-                <div className="pagination-controls">
-                    <label>
-                        Show:
-                        <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
-                            <option value={8}>8</option>
-                            <option value={16}>16</option>
-                            <option value={filteredDoctors.length}>All</option>
-                        </select>
-                    </label>
-                </div>
+                <div className="show-dropdown-container">
+    {/* <label htmlFor="itemsPerPage">Show:</label> */}
+    <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange}>
+        <option value={8}>8</option>
+        <option value={16}>16</option>
+        <option value={filteredDoctors.length}>All</option>
+    </select>
+</div>
             </div>
 
             <div className="doctor-container">

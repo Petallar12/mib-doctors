@@ -43,7 +43,7 @@ body {
     gap: 20px;
     padding-top: 20px;
 }
-
+/* center the  text (doctors name,speciality,clinics name */
 .doctor-box {
     border: 1px solid #ccc;
     padding: 15px;
@@ -66,14 +66,14 @@ body {
 /* Change the clinic name and specialization to not bold */
 .doctor-box p {
     margin: 5px 0;
-    font-size: 12px;
+    font-size: 15px;
     font-weight: normal;
 }
 
 .doctor-box a {
     color: #007BFF;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .doctor-box a:hover {
