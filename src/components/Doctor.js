@@ -17,6 +17,10 @@ const Doctor = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalContent, setModalContent] = useState('');
 
+    // Pagination states
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(8); // Default items per page
+
     useEffect(() => {
         loadDoctors();
     }, []);
@@ -64,6 +68,7 @@ const Doctor = () => {
         }
 
         setFilteredDoctors(updatedDoctors);
+        setCurrentPage(1); // Reset to the first page when filters are applied
     };
 
     const handleFilterChange = (e) => {
@@ -119,6 +124,22 @@ const Doctor = () => {
         setModalIsOpen(false);
         setModalContent('');
     };
+
+    // Pagination handlers
+    const handleItemsPerPageChange = (e) => {
+        setItemsPerPage(Number(e.target.value));
+        setCurrentPage(1); // Reset to the first page when items per page changes
+    };
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    // Calculate pagination variables
+    const indexOfLastDoctor = currentPage * itemsPerPage;
+    const indexOfFirstDoctor = indexOfLastDoctor - itemsPerPage;
+    const currentDoctors = filteredDoctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+    const totalPages = Math.ceil(filteredDoctors.length / itemsPerPage);
 
     return (
         <div className="container">
@@ -186,26 +207,50 @@ const Doctor = () => {
                         <button key={letter} onClick={() => handleLetterClick(letter)}>{letter}</button>
                     ))}
                 </div>
+                {/* Pagination control */}
+                <div className="show-dropdown-container">
+                    <label htmlFor="itemsPerPage"></label>
+                    <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange}>
+                        <option value={8}>8</option>
+                        <option value={16}>16</option>
+                        <option value={filteredDoctors.length}>All</option>
+                    </select>
+                </div>
             </div>
 
             <div className="doctor-container">
-                {filteredDoctors.map(doctor => (
+                {currentDoctors.map(doctor => (
                     <div className="doctor-box" key={doctor.id}>
                         <div className="photo-box">
-                        <img 
-    src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
-    alt={`${doctor.name}'s Photo`} 
-    onError={handleImageError} 
-/>
+                            <img 
+                                src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
+                                alt={`${doctor.name}'s Photo`} 
+                                onError={handleImageError} 
+                            />
                         </div>
                         <h3>
-    <Link to={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
-</h3>
+                            <Link to={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
+                        </h3>
                         <p><FaUserMd /> {doctor.speciality}</p>
                         <p><FaClinicMedical /> {doctor.clinic_name}</p>
                     </div>
                 ))}
             </div>
+
+            {/* Pagination buttons */}
+            {totalPages > 1 && (
+                <div className="pagination-buttons">
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button 
+                            key={index + 1} 
+                            onClick={() => handlePageChange(index + 1)} 
+                            className={currentPage === index + 1 ? 'active' : ''}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

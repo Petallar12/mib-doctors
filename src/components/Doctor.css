@@ -1,4 +1,10 @@
 /* src/components/Doctor.css */
+/* Apply a light gray background to the whole page */
+body {
+    background-color: #f0f0f0; /* Light gray background */
+    margin: 0;
+    font-family: Arial, sans-serif; /* Optional: improve typography */
+}
 
 .container {
     width: 100%;
@@ -43,10 +49,15 @@
     padding: 15px;
     border-radius: 8px;
     background-color: #f9f9f9;
-    
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-   
+    text-align: center; /* Center-align text within the box */
 }
+.doctor-box h3 {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 .doctor-box h3 a {
     color: #000; /* Black color for the doctor's name */
    
@@ -57,7 +68,6 @@
     margin: 5px 0;
     font-size: 12px;
     font-weight: normal;
-    
 }
 
 .doctor-box a {
@@ -208,6 +218,8 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -337,37 +349,61 @@
 }
 
 
-/* Spinner */
-
-/* Spinner.css */
-.spinner {
-    width: 40px;
-    height: 40px;
-    position: relative;
-    margin: 100px auto;
+.pagination-controls {
+    margin-top: 20px;
+    text-align: right;
 }
 
-.double-bounce1, .double-bounce2 {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #333;
-    opacity: 0.6;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: bounce 2.0s infinite ease-in-out;
+.pagination-buttons {
+    margin-top: 20px;
+    text-align: center;
 }
 
-.double-bounce2 {
-    animation-delay: -1.0s;
+.pagination-buttons button {
+    margin: 0 5px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-@keyframes bounce {
-    0%, 100% {
-        transform: scale(0.0);
-    }
-    50% {
-        transform: scale(1.0);
-    }
+.pagination-buttons button.active {
+    background-color: #0056b3;
+}
+
+.pagination-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Container for the Show dropdown */
+.show-dropdown-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.show-dropdown-container label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.show-dropdown-container select {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.show-dropdown-container select:hover {
+    background-color: #e0e0e0;
+    border-color: #007BFF;
 }
