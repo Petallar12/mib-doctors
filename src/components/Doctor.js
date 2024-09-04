@@ -200,13 +200,12 @@ const Doctor = () => {
                     ))}
                 </div>
                 <div className="show-dropdown-container">
-    {/* <label htmlFor="itemsPerPage">Show:</label> */}
-    <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange}>
-        <option value={8}>8</option>
-        <option value={16}>16</option>
-        <option value={filteredDoctors.length}>All</option>
-    </select>
-</div>
+                    <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange}>
+                        <option value={8}>8</option>
+                        <option value={16}>16</option>
+                        <option value={filteredDoctors.length}>All</option>
+                    </select>
+                </div>
             </div>
 
             <div className="doctor-container">
@@ -222,8 +221,8 @@ const Doctor = () => {
                         <h3>
                             <Link to={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
                         </h3>
-                        <p><FaUserMd /> {doctor.speciality}</p>
-                        <p><FaClinicMedical /> {doctor.clinic_name}</p>
+                        {doctor.speciality && <p><FaUserMd /> {doctor.speciality}</p>}
+                        {doctor.clinic_name && <p><FaClinicMedical /> {doctor.clinic_name}</p>}
                     </div>
                 ))}
             </div>

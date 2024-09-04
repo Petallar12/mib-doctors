@@ -383,16 +383,18 @@ body {
     align-items: center;
     justify-content: flex-end;
     margin-top: 10px;
+    margin-right:20px;
 }
 
 .show-dropdown-container label {
     margin-right: 10px;
     font-size: 16px;
     color: #333;
+    
 }
 
 .show-dropdown-container select {
-    padding: 6px 12px;
+    padding: 6px 2px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f4f4f4;

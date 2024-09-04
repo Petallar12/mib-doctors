@@ -38,7 +38,7 @@ const DoctorDetail = () => {
         <div className="doctor-detail-container">
             <div className="doctor-detail-card">
                 <div className="doctor-detail-header">
-                <img 
+                    <img 
                         className="doctor-detail-photo" 
                         src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
                         alt={`${doctor.name}'s Photo`} 
@@ -52,10 +52,11 @@ const DoctorDetail = () => {
                 </div>
                 <div className="doctor-detail-body">
                     <h3>Contact Information</h3>
-                    <p><FaMapMarkerAlt /> {doctor.address_1}</p>
-                    <p><FaMapMarkerAlt /> {doctor.address_2}</p>
-                    <p><FaMapMarkerAlt /> {doctor.address_3}</p>
-                    <p><FaMapMarkerAlt /> {doctor.address_4}</p>
+                    {doctor.address_1 && <p><FaMapMarkerAlt /> {doctor.address_1}</p>}
+                    {doctor.address_2 && <p><FaMapMarkerAlt /> {doctor.address_2}</p>}
+                    {doctor.address_3 && <p><FaMapMarkerAlt /> {doctor.address_3}</p>}
+                    {doctor.address_4 && <p><FaMapMarkerAlt /> {doctor.address_4}</p>}
+                    {doctor.email && <p><FaMapMarkerAlt /> {doctor.email}</p>} {/* Example for email display */}
 
                     <h3>More Info</h3>
                     <p>{doctor.more_info || "No additional information available."}</p>
