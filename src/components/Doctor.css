@@ -1,7 +1,7 @@
 /* src/components/Doctor.css */
 /* Apply a light gray background to the whole page */
 body {
-    background-color: #f0f0f0; /* Light gray background */
+    background-color: #d9d9d9; /* Light gray background */
     margin: 0;
     font-family: Arial, sans-serif; /* Optional: improve typography */
 }
@@ -204,7 +204,7 @@ body {
 }
 
 .suggestions li:hover {
-    background-color: #f0f0f0;
+    background-color: #d9d9d9;
 }
 /* Container to wrap each input and its suggestions */
 .input-container {
