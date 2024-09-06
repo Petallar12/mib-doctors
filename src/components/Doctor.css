@@ -151,13 +151,18 @@ body {
     font-size: 14px;
 }
 
+/* General styles for the alphabet filter */
 .alphabet-filter {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    width: 100%;
-    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+/* Hide the alphabet filter on smaller screens */
+@media (max-width: 768px) {
+    .alphabet-filter {
+        display: none;
+    }
 }
 
 .alphabet-filter button {

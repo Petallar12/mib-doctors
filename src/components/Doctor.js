@@ -194,11 +194,11 @@ const Doctor = () => {
                     </div>
                 </div>
                 <div className="alphabet-filter">
-                    <button onClick={() => handleLetterClick('')}>All</button>
-                    {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => (
-                        <button key={letter} onClick={() => handleLetterClick(letter)}>{letter}</button>
-                    ))}
-                </div>
+    <button onClick={() => handleLetterClick('')}>All</button>
+    {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => (
+        <button key={letter} onClick={() => handleLetterClick(letter)}>{letter}</button>
+    ))}
+</div>
                 <div className="show-dropdown-container">
                     <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange}>
                         <option value={8}>8</option>
