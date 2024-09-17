@@ -134,7 +134,7 @@ const Doctor = () => {
 
     return (
         <div className="container">
-            <center><h1>List of Doctors</h1></center>
+            <center><h1>List of Doctorss</h1></center>
             <div className="filter-box">
                 <div className="filter-container">
                     <div className="input-container">
