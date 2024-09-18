@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Doctor.css';
 import placeholderImage from '../images/default.jpg'; // This is the local placeholder image
 import { FaMapMarkerAlt, FaClinicMedical, FaUserMd } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Doctor = () => {
     const [doctors, setDoctors] = useState([]);
@@ -16,9 +16,17 @@ const Doctor = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(8); // Default items per page
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
     useEffect(() => {
+        // Read page number from query parameters
+        const params = new URLSearchParams(location.search);
+        const page = parseInt(params.get('page'), 10) || 1;
+        setCurrentPage(page); // Set current page from the URL
+
         loadDoctors();
-    }, []);
+    }, [location.search]); // Add location.search to the dependency array to watch for changes
 
     useEffect(() => {
         applyFilters();
@@ -63,7 +71,6 @@ const Doctor = () => {
         }
 
         setFilteredDoctors(updatedDoctors);
-        setCurrentPage(1); // Reset to the first page when filters are applied
     };
 
     const handleFilterChange = (e) => {
@@ -141,6 +148,8 @@ const Doctor = () => {
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
+        // Update the URL with the current page
+        navigate(`?page=${pageNumber}`);
     };
 
     // Calculate pagination variables
@@ -153,64 +162,64 @@ const Doctor = () => {
         <div className="container">
             <center><h1>List of Doctors</h1></center>
             <div className="filter-box">
-            <div className="filter-container">
-    <div className="input-container">
-        <input 
-            type="text" 
-            placeholder="Doctor's Name" 
-            name="name" 
-            value={filters.name} 
-            onChange={handleFilterChange} 
-        />
-        {nameSuggestions.length > 0 && (
-            <ul className="suggestions">
-                {nameSuggestions.map((suggestion, index) => (
-                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'name')}>
-                        {suggestion}
-                    </li>
-                ))}
-            </ul>
-        )}
-    </div>
-    <div className="input-container">
-        <input 
-            type="text" 
-            placeholder="Type of Speciality" 
-            name="speciality" 
-            value={filters.speciality} 
-            onChange={handleFilterChange}
-            onClick={handleSpecialityInputClick} 
-        />
-        {specialitySuggestions.length > 0 && (
-            <ul className="suggestions">
-                {specialitySuggestions.map((suggestion, index) => (
-                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'speciality')}>
-                        {suggestion}
-                    </li>
-                ))}
-            </ul>
-        )}
-    </div>
-    <div className="input-container">
-        <input 
-            type="text" 
-            placeholder="Clinic's Name" 
-            name="clinic_name" 
-            value={filters.clinic_name} 
-            onChange={handleFilterChange} 
-            onClick={handleClinicInputClick} 
-        />
-        {clinicNameSuggestions.length > 0 && (
-            <ul className="suggestions">
-                {clinicNameSuggestions.map((suggestion, index) => (
-                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'clinic_name')}>
-                        {suggestion}
-                    </li>
-                ))}
-            </ul>
-        )}
-    </div>
-</div>
+                <div className="filter-container">
+                    <div className="input-container">
+                        <input 
+                            type="text" 
+                            placeholder="Doctor's Name" 
+                            name="name" 
+                            value={filters.name} 
+                            onChange={handleFilterChange} 
+                        />
+                        {nameSuggestions.length > 0 && (
+                            <ul className="suggestions">
+                                {nameSuggestions.map((suggestion, index) => (
+                                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'name')}>
+                                        {suggestion}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    <div className="input-container">
+                        <input 
+                            type="text" 
+                            placeholder="Type of Speciality" 
+                            name="speciality" 
+                            value={filters.speciality} 
+                            onChange={handleFilterChange}
+                            onClick={handleSpecialityInputClick} 
+                        />
+                        {specialitySuggestions.length > 0 && (
+                            <ul className="suggestions">
+                                {specialitySuggestions.map((suggestion, index) => (
+                                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'speciality')}>
+                                        {suggestion}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    <div className="input-container">
+                        <input 
+                            type="text" 
+                            placeholder="Clinic's Name" 
+                            name="clinic_name" 
+                            value={filters.clinic_name} 
+                            onChange={handleFilterChange} 
+                            onClick={handleClinicInputClick} 
+                        />
+                        {clinicNameSuggestions.length > 0 && (
+                            <ul className="suggestions">
+                                {clinicNameSuggestions.map((suggestion, index) => (
+                                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'clinic_name')}>
+                                        {suggestion}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                </div>
 
                 <div className="alphabet-filter">
                     <button onClick={() => handleLetterClick('')}>All</button>
@@ -238,7 +247,7 @@ const Doctor = () => {
                             />
                         </div>
                         <h3>
-                            <Link to={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
+                            <Link to={`/doctor/${doctor.id}?page=${currentPage}`}>{doctor.name.toUpperCase()}</Link>
                         </h3>
                         {doctor.speciality && <p><FaUserMd /> {doctor.speciality}</p>}
                         {doctor.clinic_name && <p><FaClinicMedical /> {doctor.clinic_name}</p>}

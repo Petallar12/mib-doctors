@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
-import './Doctor.css'; // Reuse the CSS for styling
-import placeholderImage from '../images/default.jpg'; // Import the placeholder image
-import { FaMapMarkerAlt, FaClinicMedical, FaUserMd, FaArrowLeft } from 'react-icons/fa'; // Import some icons
-import Spinner from './Spinner'; // Import the Spinner component
+import { useParams, useLocation, Link } from 'react-router-dom';
+import './Doctor.css'; 
+import placeholderImage from '../images/default.jpg'; 
+import { FaMapMarkerAlt, FaClinicMedical, FaUserMd, FaArrowLeft } from 'react-icons/fa'; 
+import Spinner from './Spinner'; 
 
 const DoctorDetail = () => {
     const { id } = useParams();
+    const location = useLocation();
     const [doctor, setDoctor] = useState(null);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         loadDoctorDetails();
@@ -22,17 +23,20 @@ const DoctorDetail = () => {
         } catch (error) {
             console.error('Failed to load doctor details:', error);
         } finally {
-            setLoading(false); // Stop loading spinner once data is fetched
+            setLoading(false); 
         }
     };
 
     const handleImageError = (e) => {
-        e.target.src = placeholderImage; // Set the placeholder image on error
+        e.target.src = placeholderImage; 
     };
 
     if (loading) {
-        return <Spinner />; // Display the spinner while loading
+        return <Spinner />; 
     }
+
+    // Get the current page from the query parameter
+    const currentPage = new URLSearchParams(location.search).get('page') || 1;
 
     return (
         <div className="doctor-detail-container">
@@ -56,14 +60,16 @@ const DoctorDetail = () => {
                     {doctor.address_2 && <p><FaMapMarkerAlt /> {doctor.address_2}</p>}
                     {doctor.address_3 && <p><FaMapMarkerAlt /> {doctor.address_3}</p>}
                     {doctor.address_4 && <p><FaMapMarkerAlt /> {doctor.address_4}</p>}
-                    {doctor.email && <p><FaMapMarkerAlt /> {doctor.email}</p>} {/* Example for email display */}
+                    {doctor.email && <p><FaMapMarkerAlt /> {doctor.email}</p>} 
 
                     <h3>More Info</h3>
                     <p>{doctor.more_info || "No additional information available."}</p>
 
-                    <Link to="/" className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
+                    {/* Back to List link including the current page number */}
+                    <Link to={`/?page=${currentPage}`} className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
                         <FaArrowLeft /> Back to List
                     </Link>
+
                 </div>
             </div>
         </div>
