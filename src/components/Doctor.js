@@ -103,10 +103,10 @@ const Doctor = () => {
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         setFilters({ ...filters, [name]: value });
-
+    
         if (name === 'name' && value) {
             const suggestions = [...new Set(doctors
-                .filter(doctor => doctor.name.toLowerCase().includes(value.toLowerCase()))
+                .filter(doctor => doctor.name.toLowerCase().startsWith(value.toLowerCase())) // Only match from the start
                 .map(doctor => doctor.name.toUpperCase()))];
             setNameSuggestions(suggestions);
         } else if (name === 'speciality') {
@@ -115,8 +115,11 @@ const Doctor = () => {
                 const uniqueSpecialties = [...new Set(doctors.map(doctor => doctor.speciality.toUpperCase()))];
                 setSpecialitySuggestions(uniqueSpecialties);
             } else {
-                // Hide suggestions if something is typed
-                setSpecialitySuggestions([]);
+                // Only show suggestions starting with the input value
+                const suggestions = [...new Set(doctors
+                    .filter(doctor => doctor.speciality.toLowerCase().startsWith(value.toLowerCase())) // Only match from the start
+                    .map(doctor => doctor.speciality.toUpperCase()))];
+                setSpecialitySuggestions(suggestions);
             }
         } else if (name === 'clinic_name') {
             if (value === '') {
@@ -124,8 +127,11 @@ const Doctor = () => {
                 const uniqueClinics = [...new Set(doctors.map(doctor => doctor.clinic_name.toUpperCase()))];
                 setClinicNameSuggestions(uniqueClinics);
             } else {
-                // Hide suggestions if something is typed
-                setClinicNameSuggestions([]);
+                // Only show suggestions starting with the input value
+                const suggestions = [...new Set(doctors
+                    .filter(doctor => doctor.clinic_name.toLowerCase().startsWith(value.toLowerCase())) // Only match from the start
+                    .map(doctor => doctor.clinic_name.toUpperCase()))];
+                setClinicNameSuggestions(suggestions);
             }
         } else {
             setNameSuggestions([]);
@@ -133,7 +139,6 @@ const Doctor = () => {
             setClinicNameSuggestions([]);
         }
     };
-
     // Set unique specialties on input click
     const handleSpecialityInputClick = () => {
         if (filters.speciality === '') { // Show suggestions only if the input is empty
