@@ -99,6 +99,12 @@ const Doctor = () => {
         setSpecialitySuggestions(uniqueSpecialties);
     };
 
+    // Set unique clinics on input click
+    const handleClinicInputClick = () => {
+        const uniqueClinics = [...new Set(doctors.map(doctor => doctor.clinic_name.toUpperCase()))];
+        setClinicNameSuggestions(uniqueClinics);
+    };
+
     const handleSuggestionClick = (suggestion, type) => {
         setFilters({ ...filters, [type]: suggestion });
         setNameSuggestions([]);
@@ -134,7 +140,7 @@ const Doctor = () => {
 
     return (
         <div className="container">
-            <center><h1>List of Doctors </h1></center>
+            <center><h1>List of Doctors</h1></center>
             <div className="filter-box">
                 <div className="filter-container">
                     <div className="input-container">
@@ -181,6 +187,7 @@ const Doctor = () => {
                             name="clinic_name" 
                             value={filters.clinic_name} 
                             onChange={handleFilterChange} 
+                            onClick={handleClinicInputClick} // Show unique clinic names on click
                         />
                         {clinicNameSuggestions.length > 0 && (
                             <ul className="suggestions">
@@ -194,11 +201,11 @@ const Doctor = () => {
                     </div>
                 </div>
                 <div className="alphabet-filter">
-    <button onClick={() => handleLetterClick('')}>All</button>
-    {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => (
-        <button key={letter} onClick={() => handleLetterClick(letter)}>{letter}</button>
-    ))}
-</div>
+                    <button onClick={() => handleLetterClick('')}>All</button>
+                    {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => (
+                        <button key={letter} onClick={() => handleLetterClick(letter)}>{letter}</button>
+                    ))}
+                </div>
                 <div className="show-dropdown-container">
                     <select id="itemsPerPage" value={itemsPerPage} onChange={handleItemsPerPageChange}>
                         <option value={8}>8</option>
