@@ -69,23 +69,30 @@ const Doctor = () => {
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         setFilters({ ...filters, [name]: value });
-    
+
         if (name === 'name' && value) {
             const suggestions = [...new Set(doctors
                 .filter(doctor => doctor.name.toLowerCase().includes(value.toLowerCase()))
                 .map(doctor => doctor.name.toUpperCase()))];
             setNameSuggestions(suggestions);
-        } else if (name === 'speciality' && value) {
-            // Filter specialties based on the input value
-            const uniqueSpecialties = [...new Set(doctors
-                .map(doctor => doctor.speciality.toUpperCase())
-                .filter(speciality => speciality.includes(value.toUpperCase())))];
-            setSpecialitySuggestions(uniqueSpecialties);
-        } else if (name === 'clinic_name' && value) {
-            const suggestions = [...new Set(doctors
-                .filter(doctor => doctor.clinic_name.toLowerCase().includes(value.toLowerCase()))
-                .map(doctor => doctor.clinic_name.toUpperCase()))];
-            setClinicNameSuggestions(suggestions);
+        } else if (name === 'speciality') {
+            if (value === '') {
+                // Show all specialties if the field is empty
+                const uniqueSpecialties = [...new Set(doctors.map(doctor => doctor.speciality.toUpperCase()))];
+                setSpecialitySuggestions(uniqueSpecialties);
+            } else {
+                // Hide suggestions if something is typed
+                setSpecialitySuggestions([]);
+            }
+        } else if (name === 'clinic_name') {
+            if (value === '') {
+                // Show all clinics if the field is empty
+                const uniqueClinics = [...new Set(doctors.map(doctor => doctor.clinic_name.toUpperCase()))];
+                setClinicNameSuggestions(uniqueClinics);
+            } else {
+                // Hide suggestions if something is typed
+                setClinicNameSuggestions([]);
+            }
         } else {
             setNameSuggestions([]);
             setSpecialitySuggestions([]);
@@ -95,14 +102,18 @@ const Doctor = () => {
 
     // Set unique specialties on input click
     const handleSpecialityInputClick = () => {
-        const uniqueSpecialties = [...new Set(doctors.map(doctor => doctor.speciality.toUpperCase()))];
-        setSpecialitySuggestions(uniqueSpecialties);
+        if (filters.speciality === '') { // Show suggestions only if the input is empty
+            const uniqueSpecialties = [...new Set(doctors.map(doctor => doctor.speciality.toUpperCase()))];
+            setSpecialitySuggestions(uniqueSpecialties);
+        }
     };
 
     // Set unique clinics on input click
     const handleClinicInputClick = () => {
-        const uniqueClinics = [...new Set(doctors.map(doctor => doctor.clinic_name.toUpperCase()))];
-        setClinicNameSuggestions(uniqueClinics);
+        if (filters.clinic_name === '') { // Show suggestions only if the input is empty
+            const uniqueClinics = [...new Set(doctors.map(doctor => doctor.clinic_name.toUpperCase()))];
+            setClinicNameSuggestions(uniqueClinics);
+        }
     };
 
     const handleSuggestionClick = (suggestion, type) => {
@@ -142,64 +153,65 @@ const Doctor = () => {
         <div className="container">
             <center><h1>List of Doctors</h1></center>
             <div className="filter-box">
-                <div className="filter-container">
-                    <div className="input-container">
-                        <input 
-                            type="text" 
-                            placeholder="Doctor's Name" 
-                            name="name" 
-                            value={filters.name} 
-                            onChange={handleFilterChange} 
-                        />
-                        {nameSuggestions.length > 0 && (
-                            <ul className="suggestions">
-                                {nameSuggestions.map((suggestion, index) => (
-                                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'name')}>
-                                        {suggestion}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                    <div className="input-container">
-                        <input 
-                            type="text" 
-                            placeholder="Type of Speciality" 
-                            name="speciality" 
-                            value={filters.speciality} 
-                            onChange={handleFilterChange}
-                            onClick={handleSpecialityInputClick} // Show unique specialties on click
-                        />
-                        {specialitySuggestions.length > 0 && (
-                            <ul className="suggestions">
-                                {specialitySuggestions.map((suggestion, index) => (
-                                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'speciality')}>
-                                        {suggestion}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                    <div className="input-container">
-                        <input 
-                            type="text" 
-                            placeholder="Clinic's Name" 
-                            name="clinic_name" 
-                            value={filters.clinic_name} 
-                            onChange={handleFilterChange} 
-                            onClick={handleClinicInputClick} // Show unique clinic names on click
-                        />
-                        {clinicNameSuggestions.length > 0 && (
-                            <ul className="suggestions">
-                                {clinicNameSuggestions.map((suggestion, index) => (
-                                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'clinic_name')}>
-                                        {suggestion}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-                </div>
+            <div className="filter-container">
+    <div className="input-container">
+        <input 
+            type="text" 
+            placeholder="Doctor's Name" 
+            name="name" 
+            value={filters.name} 
+            onChange={handleFilterChange} 
+        />
+        {nameSuggestions.length > 0 && (
+            <ul className="suggestions">
+                {nameSuggestions.map((suggestion, index) => (
+                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'name')}>
+                        {suggestion}
+                    </li>
+                ))}
+            </ul>
+        )}
+    </div>
+    <div className="input-container">
+        <input 
+            type="text" 
+            placeholder="Type of Speciality" 
+            name="speciality" 
+            value={filters.speciality} 
+            onChange={handleFilterChange}
+            onClick={handleSpecialityInputClick} 
+        />
+        {specialitySuggestions.length > 0 && (
+            <ul className="suggestions">
+                {specialitySuggestions.map((suggestion, index) => (
+                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'speciality')}>
+                        {suggestion}
+                    </li>
+                ))}
+            </ul>
+        )}
+    </div>
+    <div className="input-container">
+        <input 
+            type="text" 
+            placeholder="Clinic's Name" 
+            name="clinic_name" 
+            value={filters.clinic_name} 
+            onChange={handleFilterChange} 
+            onClick={handleClinicInputClick} 
+        />
+        {clinicNameSuggestions.length > 0 && (
+            <ul className="suggestions">
+                {clinicNameSuggestions.map((suggestion, index) => (
+                    <li key={index} onClick={() => handleSuggestionClick(suggestion, 'clinic_name')}>
+                        {suggestion}
+                    </li>
+                ))}
+            </ul>
+        )}
+    </div>
+</div>
+
                 <div className="alphabet-filter">
                     <button onClick={() => handleLetterClick('')}>All</button>
                     {'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter => (

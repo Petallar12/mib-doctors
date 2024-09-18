@@ -140,16 +140,25 @@ body {
     margin-bottom: 15px;
     width: 100%;
     box-sizing: border-box;
-    padding: 0; /* No padding here as container padding is applied */
+    gap: 20px; /* Add gap to create space between inputs */
+    padding: 0;
 }
 
-.filter-container input {
-    width: 30%;
+.input-container {
+    position: relative;
+    width: 100%; /* Set width to fill available space */
+    max-width: 30%; /* Make sure all input containers have the same max-width */
+}
+
+.input-container input {
+    width: 100%; /* Make sure inputs fill the container */
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    box-sizing: border-box; /* Include padding in the width calculation */
 }
+
 
 /* General styles for the alphabet filter */
 .alphabet-filter {
