@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/mib-doctors/static/css/main.b3e92920.css",
-    "main.js": "/mib-doctors/static/js/main.58f24ce9.js",
+    "main.js": "/mib-doctors/static/js/main.c42f80e4.js",
     "static/js/453.5d92bdc4.chunk.js": "/mib-doctors/static/js/453.5d92bdc4.chunk.js",
     "static/media/default.jpg": "/mib-doctors/static/media/default.69f25d96ff88994381dd.jpg",
     "index.html": "/mib-doctors/index.html",
     "main.b3e92920.css.map": "/mib-doctors/static/css/main.b3e92920.css.map",
-    "main.58f24ce9.js.map": "/mib-doctors/static/js/main.58f24ce9.js.map",
+    "main.c42f80e4.js.map": "/mib-doctors/static/js/main.c42f80e4.js.map",
     "453.5d92bdc4.chunk.js.map": "/mib-doctors/static/js/453.5d92bdc4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b3e92920.css",
-    "static/js/main.58f24ce9.js"
+    "static/js/main.c42f80e4.js"
   ]
 }
