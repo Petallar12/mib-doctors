@@ -65,7 +65,6 @@ const DoctorDetail = () => {
                     <h3>More Info</h3>
                     <p>{doctor.more_info || "No additional information available."}</p>
 
-                    {/* Back to List link including the current page number */}
                     <Link to={`/?page=${currentPage}`} className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
                         <FaArrowLeft /> Back to List
                     </Link>

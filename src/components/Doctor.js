@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Doctor.css';
 import placeholderImage from '../images/default.jpg'; // This is the local placeholder image
@@ -19,44 +19,18 @@ const Doctor = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // Refs to detect clicks outside of the suggestion boxes
-    const nameInputRef = useRef(null);
-    const specialityInputRef = useRef(null);
-    const clinicNameInputRef = useRef(null);
-
     useEffect(() => {
         // Read page number from query parameters
         const params = new URLSearchParams(location.search);
         const page = parseInt(params.get('page'), 10) || 1;
-        setCurrentPage(page);
+        setCurrentPage(page); // Set current page from the URL
 
         loadDoctors();
-    }, []);
+    }, [location.search]); // Add location.search to the dependency array to watch for changes
 
     useEffect(() => {
         applyFilters();
     }, [filters, selectedLetter, doctors]);
-
-    useEffect(() => {
-        // Event listener for clicks outside the suggestion boxes
-        const handleClickOutside = (event) => {
-            if (
-                nameInputRef.current && !nameInputRef.current.contains(event.target) &&
-                specialityInputRef.current && !specialityInputRef.current.contains(event.target) &&
-                clinicNameInputRef.current && !clinicNameInputRef.current.contains(event.target)
-            ) {
-                setNameSuggestions([]);
-                setSpecialitySuggestions([]);
-                setClinicNameSuggestions([]);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
 
     const loadDoctors = async () => {
         try {
@@ -97,7 +71,6 @@ const Doctor = () => {
         }
 
         setFilteredDoctors(updatedDoctors);
-        setCurrentPage(1); // Reset to the first page when filters are applied
     };
 
     const handleFilterChange = (e) => {
@@ -138,7 +111,9 @@ const Doctor = () => {
             setSpecialitySuggestions([]);
             setClinicNameSuggestions([]);
         }
-    };  
+    };
+    
+
     // Set unique specialties on input click
     const handleSpecialityInputClick = () => {
         if (filters.speciality === '') { // Show suggestions only if the input is empty
@@ -195,7 +170,7 @@ const Doctor = () => {
             <center><h1>List of Doctors</h1></center>
             <div className="filter-box">
                 <div className="filter-container">
-                    <div className="input-container" ref={nameInputRef}>
+                    <div className="input-container">
                         <input 
                             type="text" 
                             placeholder="Doctor's Name" 
@@ -213,7 +188,7 @@ const Doctor = () => {
                             </ul>
                         )}
                     </div>
-                    <div className="input-container" ref={specialityInputRef}>
+                    <div className="input-container">
                         <input 
                             type="text" 
                             placeholder="Type of Speciality" 
@@ -232,7 +207,7 @@ const Doctor = () => {
                             </ul>
                         )}
                     </div>
-                    <div className="input-container" ref={clinicNameInputRef}>
+                    <div className="input-container">
                         <input 
                             type="text" 
                             placeholder="Clinic's Name" 
@@ -269,25 +244,23 @@ const Doctor = () => {
             </div>
 
             <div className="doctor-container">
-    {currentDoctors.map(doctor => (
-        <div className="doctor-box" key={doctor.id}>
-            <div className="photo-box">
-                <img 
-                    src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
-                    alt={`${doctor.name}'s Photo`} 
-                    onError={handleImageError} 
-                />
+                {currentDoctors.map(doctor => (
+                    <div className="doctor-box" key={doctor.id}>
+                        <div className="photo-box">
+                            <img 
+                                src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
+                                alt={`${doctor.name}'s Photo`} 
+                                onError={handleImageError} 
+                            />
+                        </div>
+                        <h3>
+                            <Link to={`/doctor/${doctor.id}?page=${currentPage}`}>{doctor.name.toUpperCase()}</Link>
+                        </h3>
+                        {doctor.speciality && <p><FaUserMd /> {doctor.speciality}</p>}
+                        {doctor.clinic_name && <p><FaClinicMedical /> {doctor.clinic_name}</p>}
+                    </div>
+                ))}
             </div>
-            <h3>
-                {/* Include currentPage in the link */}
-                <Link to={`/doctor/${doctor.id}?page=${currentPage}`}>{doctor.name.toUpperCase()}</Link>
-            </h3>
-            {doctor.speciality && <p><FaUserMd /> {doctor.speciality}</p>}
-            {doctor.clinic_name && <p><FaClinicMedical /> {doctor.clinic_name}</p>}
-        </div>
-    ))}
-</div>
-
 
             {totalPages > 1 && (
                 <div className="pagination-buttons">
