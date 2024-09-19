@@ -269,23 +269,25 @@ const Doctor = () => {
             </div>
 
             <div className="doctor-container">
-                {currentDoctors.map(doctor => (
-                    <div className="doctor-box" key={doctor.id}>
-                        <div className="photo-box">
-                            <img 
-                                src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
-                                alt={`${doctor.name}'s Photo`} 
-                                onError={handleImageError} 
-                            />
-                        </div>
-                        <h3>
-                            <Link to={`/doctor/${doctor.id}`}>{doctor.name.toUpperCase()}</Link>
-                        </h3>
-                        {doctor.speciality && <p><FaUserMd /> {doctor.speciality}</p>}
-                        {doctor.clinic_name && <p><FaClinicMedical /> {doctor.clinic_name}</p>}
-                    </div>
-                ))}
+    {currentDoctors.map(doctor => (
+        <div className="doctor-box" key={doctor.id}>
+            <div className="photo-box">
+                <img 
+                    src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
+                    alt={`${doctor.name}'s Photo`} 
+                    onError={handleImageError} 
+                />
             </div>
+            <h3>
+                {/* Include currentPage in the link */}
+                <Link to={`/doctor/${doctor.id}?page=${currentPage}`}>{doctor.name.toUpperCase()}</Link>
+            </h3>
+            {doctor.speciality && <p><FaUserMd /> {doctor.speciality}</p>}
+            {doctor.clinic_name && <p><FaClinicMedical /> {doctor.clinic_name}</p>}
+        </div>
+    ))}
+</div>
+
 
             {totalPages > 1 && (
                 <div className="pagination-buttons">

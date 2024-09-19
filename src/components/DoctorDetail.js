@@ -69,7 +69,6 @@ const DoctorDetail = () => {
                     <Link to={`/?page=${currentPage}`} className="back-to-list" style={{ marginTop: '20px', display: 'block' }}>
                         <FaArrowLeft /> Back to List
                     </Link>
-
                 </div>
             </div>
         </div>
