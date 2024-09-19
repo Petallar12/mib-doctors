@@ -138,7 +138,7 @@ const Doctor = () => {
             setSpecialitySuggestions([]);
             setClinicNameSuggestions([]);
         }
-    };
+    };  
     // Set unique specialties on input click
     const handleSpecialityInputClick = () => {
         if (filters.speciality === '') { // Show suggestions only if the input is empty
