@@ -60,7 +60,7 @@ const Doctor = () => {
         };
     }, []);
 
-    const loadDoctors = async () => {
+    const loadDoctors = async () => { 
         try {
             const result = await axios.get('https://backend-doctor.vercel.app/doctors');
             setDoctors(result.data);
