@@ -266,11 +266,12 @@ const Doctor = () => {
                 {currentDoctors.map(doctor => (
                     <div className="doctor-box" key={doctor.id}>
                         <div className="photo-box">
-                            <img 
-                                src={doctor.image_url ? `${process.env.PUBLIC_URL}/images/${doctor.image_url}` : placeholderImage} 
-                                alt={`${doctor.name}'s Photo`} 
-                                onError={handleImageError} 
-                            />
+                        <img 
+    src={doctor.image_url ? `https://raw.githubusercontent.com/Petallar12/mib-doctors/main/public/images/${doctor.image_url}` : placeholderImage} 
+    alt={`${doctor.name}'s Photo`} 
+    onError={handleImageError} 
+/>
+
                         </div>
                         <h3>
                             <Link to={`/doctor/${doctor.id}?page=${currentPage}`}>{doctor.name.toUpperCase()}</Link>
